@@ -18,12 +18,12 @@
                     Every question is freshly created by Claude — no repeats, no limits.
                 </p>
                 <div class="hero-actions">
-                    <a asp-controller="Quiz" asp-action="Index" class="btn btn-hero-primary">
-                        Browse Topics
+                    <a asp-controller="Quiz" asp-action="Random"
+                       class="btn btn-hero-primary show-loading">
+                        🎲 Mixed Question
                     </a>
-                    <a asp-controller="Quiz" asp-action="Question" asp-route-categoryId="mvc-architecture"
-                       class="btn btn-hero-secondary show-loading">
-                        Quick Start
+                    <a asp-controller="Quiz" asp-action="Index" class="btn btn-hero-secondary">
+                        Browse Topics
                     </a>
                 </div>
                 <div class="hero-stats">

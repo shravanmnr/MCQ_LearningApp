@@ -35,6 +35,14 @@ public class QuizController : Controller
         return View(viewModel);
     }
 
+    // GET /Quiz/Random  — picks a random category and forwards to Question
+    public IActionResult Random()
+    {
+        var categories = _categoryService.GetAll();
+        var picked = categories[System.Random.Shared.Next(categories.Count)];
+        return RedirectToAction(nameof(Question), new { categoryId = picked.Id });
+    }
+
     // GET /Quiz/Question/{categoryId}
     public async Task<IActionResult> Question(string categoryId, CancellationToken cancellationToken)
     {
