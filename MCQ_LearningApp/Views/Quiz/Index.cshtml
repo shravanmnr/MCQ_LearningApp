@@ -1,0 +1,32 @@
+@model MCQ_LearningApp.Models.ViewModels.QuizIndexViewModel
+@{
+    ViewData["Title"] = "Topics";
+}
+
+<div class="page-header">
+    <div class="container">
+        <h1 class="page-title">Choose a Topic</h1>
+        <p class="page-subtitle">Select a topic and Claude will generate a fresh question just for you.</p>
+    </div>
+</div>
+
+<div class="container py-5">
+    <div class="row g-4">
+        @foreach (var category in Model.Categories)
+        {
+            <div class="col-sm-6 col-lg-4">
+                <a asp-controller="Quiz" asp-action="Question" asp-route-categoryId="@category.Id"
+                   class="category-card show-loading">
+                    <div class="category-card-header @category.ColorClass">
+                        <span class="category-icon">@category.Icon</span>
+                    </div>
+                    <div class="category-card-body">
+                        <h5 class="category-name">@category.Name</h5>
+                        <p class="category-desc">@category.Description</p>
+                        <span class="category-cta">Start Quiz →</span>
+                    </div>
+                </a>
+            </div>
+        }
+    </div>
+</div>

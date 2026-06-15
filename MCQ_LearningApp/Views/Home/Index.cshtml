@@ -1,0 +1,114 @@
+@model IReadOnlyList<MCQ_LearningApp.Models.Domain.Category>
+@{
+    ViewData["Title"] = "Home";
+}
+
+<!-- Hero Section -->
+<section class="hero-section">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6">
+                <div class="hero-badge">AI-Powered Learning</div>
+                <h1 class="hero-title">
+                    Master ASP.NET Core<br />
+                    <span class="hero-accent">one question at a time</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Infinite, AI-generated MCQs across 15 ASP.NET Core topics.
+                    Every question is freshly created by Claude — no repeats, no limits.
+                </p>
+                <div class="hero-actions">
+                    <a asp-controller="Quiz" asp-action="Index" class="btn btn-hero-primary">
+                        Browse Topics
+                    </a>
+                    <a asp-controller="Quiz" asp-action="Question" asp-route-categoryId="mvc-architecture"
+                       class="btn btn-hero-secondary show-loading">
+                        Quick Start
+                    </a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">15</span>
+                        <span class="stat-label">Topics</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">∞</span>
+                        <span class="stat-label">Questions</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">AI</span>
+                        <span class="stat-label">Powered</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6 d-none d-lg-block">
+                <div class="hero-visual">
+                    <div class="mock-card">
+                        <div class="mock-badge">Dependency Injection</div>
+                        <div class="mock-question">
+                            What is the default service lifetime when you call
+                            <code>services.AddScoped&lt;T&gt;()</code>?
+                        </div>
+                        <div class="mock-choices">
+                            <div class="mock-choice">Created once per application</div>
+                            <div class="mock-choice mock-correct">Created once per HTTP request ✓</div>
+                            <div class="mock-choice">Created every time it is requested</div>
+                            <div class="mock-choice">Created per thread</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Topics Preview -->
+<section class="topics-preview-section">
+    <div class="container">
+        <h2 class="section-title">Explore Topics</h2>
+        <p class="section-subtitle">Pick a topic below to get a fresh AI-generated question instantly.</p>
+
+        <div class="row g-3">
+            @foreach (var category in Model)
+            {
+                <div class="col-sm-6 col-md-4 col-lg-3">
+                    <a asp-controller="Quiz" asp-action="Question" asp-route-categoryId="@category.Id"
+                       class="topic-card show-loading">
+                        <div class="topic-card-icon">@category.Icon</div>
+                        <div class="topic-card-name">@category.Name</div>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+</section>
+
+<!-- How it works -->
+<section class="how-section">
+    <div class="container">
+        <h2 class="section-title">How it works</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-4">
+                <div class="how-step">
+                    <div class="how-number">1</div>
+                    <h5>Pick a topic</h5>
+                    <p>Select any of the 15 ASP.NET Core topics you want to practice.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="how-step">
+                    <div class="how-number">2</div>
+                    <h5>Answer the question</h5>
+                    <p>Claude generates a unique question just for you. Select your answer and submit.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="how-step">
+                    <div class="how-number">3</div>
+                    <h5>Learn from the result</h5>
+                    <p>See a detailed explanation, then hit Next Question for another fresh one.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

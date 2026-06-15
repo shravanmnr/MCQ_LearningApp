@@ -1,0 +1,108 @@
+@model MCQ_LearningApp.Models.ViewModels.QuestionViewModel
+@{
+    ViewData["Title"] = Model.CategoryName + " — Quiz";
+    var letters = new[] { "A", "B", "C", "D" };
+}
+
+<div class="quiz-shell">
+    <div class="container py-4">
+
+        <!-- Breadcrumb -->
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb quiz-breadcrumb">
+                <li class="breadcrumb-item">
+                    <a asp-controller="Quiz" asp-action="Index">Topics</a>
+                </li>
+                <li class="breadcrumb-item active">@Model.CategoryIcon @Model.CategoryName</li>
+            </ol>
+        </nav>
+
+        <div class="row justify-content-center">
+            <div class="col-xl-8 col-lg-10">
+
+                <!-- Question Card -->
+                <div class="question-card">
+                    <div class="question-card-header">
+                        <span class="question-topic-badge">@Model.CategoryIcon @Model.CategoryName</span>
+                        <span class="question-label">Question</span>
+                    </div>
+
+                    <div class="question-text">
+                        @Model.QuestionText
+                    </div>
+
+                    <!-- Anti-Forgery + hidden inputs -->
+                    <form id="quiz-form" novalidate>
+                        @Html.AntiForgeryToken()
+                        <input type="hidden" name="QuestionId" id="question-id" value="@Model.QuestionId" />
+                        <input type="hidden" name="CategoryId" value="@Model.CategoryId" />
+                        <input type="hidden" name="SelectedIndex" id="selected-index" value="-1" />
+
+                        <!-- Choice Cards -->
+                        <div class="choices-grid">
+                            @for (int i = 0; i < Model.Choices.Count; i++)
+                            {
+                                <button type="button"
+                                        class="choice-card"
+                                        data-index="@i"
+                                        aria-pressed="false">
+                                    <span class="choice-letter">@letters[i]</span>
+                                    <span class="choice-text">@Model.Choices[i]</span>
+                                    <span class="choice-indicator"></span>
+                                </button>
+                            }
+                        </div>
+
+                        <!-- Validation hint -->
+                        <p id="validation-hint" class="validation-hint d-none">
+                            Please select an answer before submitting.
+                        </p>
+
+                        <!-- Actions -->
+                        <div class="quiz-actions">
+                            <button type="submit" id="submit-btn" class="btn btn-submit" disabled>
+                                Submit Answer
+                            </button>
+                        </div>
+                    </form>
+
+                    <!-- Result Banner (hidden until answered) -->
+                    <div id="result-banner" class="result-banner d-none"></div>
+
+                    <!-- Explanation Panel (hidden until answered) -->
+                    <div id="explanation-panel" class="explanation-panel d-none">
+                        <div class="explanation-header">
+                            <span class="explanation-icon">💡</span>
+                            <strong>Explanation</strong>
+                        </div>
+                        <div id="explanation-text" class="explanation-body"></div>
+                    </div>
+
+                    <!-- Next Question (hidden until answered) -->
+                    <div id="next-actions" class="quiz-next-actions d-none">
+                        <a asp-controller="Quiz"
+                           asp-action="Question"
+                           asp-route-categoryId="@Model.CategoryId"
+                           id="next-btn"
+                           class="btn btn-next show-loading">
+                            Next Question →
+                        </a>
+                        <a asp-controller="Quiz"
+                           asp-action="Index"
+                           class="btn btn-change-topic">
+                            Change Topic
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+<script>
+    // Inline init so quiz.js initQuiz() fires after DOM is ready with model data
+    document.addEventListener('DOMContentLoaded', () => initQuiz());
+</script>
+}

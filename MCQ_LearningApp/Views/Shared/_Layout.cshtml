@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] — ASP.NET Trainer</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    @await RenderSectionAsync("Styles", required: false)
+</head>
+<body>
+
+    <nav class="app-navbar navbar navbar-expand-md">
+        <div class="container">
+            <a class="navbar-brand" asp-controller="Home" asp-action="Index">
+                <span class="brand-pulse">⚡</span>
+                <span class="brand-text">ASP.NET Trainer</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-md-center gap-1">
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" asp-controller="Quiz" asp-action="Index">Topics</a>
+                    </li>
+                    <li class="nav-item ms-md-2">
+                        <a class="btn btn-primary btn-sm px-3" asp-controller="Quiz" asp-action="Index">
+                            Start Quiz
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    @if (TempData["Error"] != null)
+    {
+        <div class="container mt-3">
+            <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                <strong>Error:</strong> @TempData["Error"]
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </div>
+    }
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer class="app-footer">
+        <div class="container text-center">
+            <p class="mb-0 text-muted small">
+                Built to master ASP.NET Core — one question at a time &nbsp;·&nbsp;
+                Powered by <strong>Claude AI</strong>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Full-page loading overlay shown while Claude generates a question -->
+    <div id="loading-overlay" class="loading-overlay d-none">
+        <div class="loading-box">
+            <div class="loading-spinner"></div>
+            <p class="loading-text">Generating your question…</p>
+            <p class="loading-sub">Claude is thinking</p>
+        </div>
+    </div>
+
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/quiz.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
