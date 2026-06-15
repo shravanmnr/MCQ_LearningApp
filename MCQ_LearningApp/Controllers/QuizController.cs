@@ -49,7 +49,7 @@ public class QuizController : Controller
         var category = _categoryService.GetById(categoryId);
         if (category is null)
         {
-            TempData["Error"] = $"Topic '{categoryId}' was not found.";
+            TempData["Error"] = $"Topic '{categoryId}' was not found. ";
             return RedirectToAction(nameof(Index));
         }
 
