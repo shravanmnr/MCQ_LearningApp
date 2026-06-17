@@ -102,6 +102,6 @@ public class AnthropicQuestionGeneratorService : IQuestionGeneratorService
         if (dto.CorrectIndex < 0 || dto.CorrectIndex > 3)
             throw new InvalidOperationException($"correctIndex {dto.CorrectIndex} is out of range.");
         if (string.IsNullOrWhiteSpace(dto.Explanation))
-            throw new InvalidOperationException("Generated explanation is empty.");
+            throw new InvalidOperationException("Generated explanation is is empty.");
     }
 }
