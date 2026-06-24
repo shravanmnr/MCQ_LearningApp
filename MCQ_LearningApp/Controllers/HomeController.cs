@@ -25,4 +25,14 @@ public class HomeController : Controller
     {
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
+    [Route("DefaultLayer")]
+    public IActionResult DefaultLayer()
+	{
+        if(Request.Query.ContainsKey("IsAuthenticated"))
+		{
+			return Content("Default layer is not implemented yet.");
+		}
+		return Content(" ");
+
+	}
 }
