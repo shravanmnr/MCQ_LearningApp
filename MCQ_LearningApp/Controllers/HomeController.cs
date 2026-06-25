@@ -30,7 +30,8 @@ public class HomeController : Controller
 	{
         if(Request.Query.ContainsKey("IsAuthenticated"))
 		{
-			return Content("Default layer is not implemented yet.");
+            
+			return BadRequest("Default layer is not implemented yet.");
 		}
 		return Content(" ");
 
