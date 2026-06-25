@@ -26,12 +26,12 @@ public class HomeController : Controller
         return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
     }
     [Route("DefaultLayer")]
-    public IActionResult DefaultLayer()
+    public IActionResult DefaultRoute()
 	{
         if(Request.Query.ContainsKey("IsAuthenticated"))
 		{
             
-			return BadRequest("Default layer is not implemented yet.");
+			return BadRequest("Default Route is not implemented yet.");
 		}
 		return Content(" ");
 
