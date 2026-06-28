@@ -31,7 +31,7 @@ public class HomeController : Controller
         if(Request.Query.ContainsKey("IsAuthenticated"))
 		{
             
-			return BadRequest("Default Route is not implemented yet.");
+			return BadRequest("Dafault Route");
 		}
 		return Content(" ");
 
